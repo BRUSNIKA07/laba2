@@ -2,13 +2,49 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet", href="./styles/main.css">
+    <title>Мое Портфолио</title>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <h1>Hello, World!</h1>
 
-    <script src="./scripts/main.js"></script>
+    <div class="turntable-container">
+        <div class="turntable">
+            <div class="record-player">
+                <div class="vinyl" id="vinyl-disc">
+                    <div class="label">
+                        <h2 id="label-title">ОБО МНЕ</h2>
+                    </div>
+                </div>
+                <div class="tonearm" id="tonearm">
+                    <div class="head"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-display">
+            <h1 id="content-title">Привет! Я, Никишин Александр Михайлович</h1>
+            <p id="content-text">Я студент ДВФУ, вот кое-что обо мне.</p>
+        </div>
+    </div>
+
+    <div class="collection">
+        <h3>Коллекция</h3>
+        <div class="records-list">
+            <div class="record-item active" data-target="about">
+                <div class="record-cover bg-brown"></div>
+                <span>VOL.1 Обо мне</span>
+            </div>
+            <div class="record-item" data-target="hobby">
+                <div class="record-cover bg-green"></div>
+                <span>VOL.2 Хобби</span>
+            </div>
+            <div class="record-item" data-target="projects">
+                <div class="record-cover bg-pink"></div>
+                <span>VOL.3 Навыки</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
 </body>
 </html>
