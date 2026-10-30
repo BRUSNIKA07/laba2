@@ -97,11 +97,28 @@ document.addEventListener('DOMContentLoaded', () => {
             const s = document.createElement('span');
             s.className = 'num';
             s.textContent = i;
-            s.style.transform = `translate(-50%,-50%) rotate(${(i + 0.5) * SECTOR}deg) translateY(-190px)`;
+            s.style.transform = `translate(-50%,-50%) rotate(${(i + 0.5) * SECTOR}deg) translateY(-36.5cqw)`;
             vinyl.appendChild(s);
         }
         contentText.querySelectorAll('.bet').forEach(b =>
             b.addEventListener('click', () => spin(b.dataset.c, b.dataset.p)));
+    }
+
+    function needleAngle() {
+        const v = vinyl.getBoundingClientRect(), t = tip.getBoundingClientRect();
+        return Math.atan2(t.left + t.width / 2 - v.left - v.width / 2,
+                          v.top + v.height / 2 - t.top - t.height / 2) * 180 / Math.PI;
+    }
+
+    function loweredNeedleAngle() {
+        const was = tonearm.classList.contains('playing');
+        tonearm.style.transition = 'none';
+        tonearm.classList.add('playing');
+        const a = needleAngle();
+        tonearm.classList.toggle('playing', was);
+        void tonearm.offsetWidth;
+        tonearm.style.transition = '';
+        return a;
     }
 
     function spin(color, parity) {
@@ -112,8 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
         balance -= STAKE;
         bank.textContent = balance;
         msg.textContent = 'Тонарм поднят, колесо крутится…';
+
+        const target = Math.floor(Math.random() * 37);
+        const need = (((loweredNeedleAngle() - (target + 0.5) * SECTOR) % 360) + 360) % 360;
+        rot += 360 * 5 + ((((need - rot) % 360) + 360) % 360);
+
         tonearm.classList.remove('playing');
-        rot += 360 * 5 + Math.random() * 360;
         vinyl.style.transform = `rotate(${rot}deg)`;
         setTimeout(() => {
             if (id !== gameId) return;
@@ -125,11 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function finish(color, parity, bank, msg, buttons) {
-        const v = vinyl.getBoundingClientRect();
-        const h = tonearm.querySelector('.head').getBoundingClientRect();
-        const angle = Math.atan2(h.left + h.width / 2 - v.left - v.width / 2,
-                                 -(h.top + h.height / 2 - v.top - v.height / 2)) * 180 / Math.PI;
-        const n = Math.floor((((angle - rot) % 360) + 720) % 360 / SECTOR);
+        const n = Math.floor((((needleAngle() - rot) % 360) + 360) % 360 / SECTOR);
         const c = colorOf(n);
         const win = n > 0 && c === color && isEven(n) === (parity === 'even');
         const names = { green: 'зелёное', red: 'красное', black: 'чёрное' };
@@ -155,6 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentText = document.getElementById('content-text');
     const centerLabel = document.querySelector('.label');
     let timer;
+
+    const tip = document.createElement('i');
+    tip.style.cssText = 'position:absolute;left:50%;bottom:-1.35cqw;width:1px;height:1px;pointer-events:none';
+    tonearm.querySelector('.head').appendChild(tip);
 
     function show(record) {
         const data = contentData[record.dataset.target];
@@ -183,12 +204,12 @@ document.addEventListener('DOMContentLoaded', () => {
             record.classList.add('active');
 
             clearTimeout(timer);
-            tonearm.classList.remove('playing');   
-            vinyl.classList.remove('spin');        
+            tonearm.classList.remove('playing');
+            vinyl.classList.remove('spin');
 
             timer = setTimeout(() => {
-                show(record);                      
-                timer = setTimeout(play, 600);     
+                show(record);
+                timer = setTimeout(play, 600);
             }, 900);
         });
     });
