@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const PROJECTS = [
         ['Персональный сайт', 'HTML + CSS + JS', '#e08aa0'],
         ['Игра на Python', 'Рогалик на python(pygame)', '#6fb7a8'],
-        ['Калькулятор', 'C++, консольное приложение', '#f0c36a'],
+        ['Калькулятор', 'Python', '#f0c36a'],
         ['Конект 2х компов', 'Python + tcp + udp', '#9bb7e0'],
         ['Работа с arduino', 'Валютный флюгер', '#c9a0dc']
     ];
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <ul class="facts">
                     <li>Люблю старые японские машины.</li>
                     <li>Играю на гитаре.</li>
+                    <li>Хожу в спорт зал.</li>
                     <li>Люблю поиграть в доту и просто хорошо провести время.</li>
                 </ul>`
         },
