@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const PROJECTS = [
-        ['Сайт-визитка', 'HTML + CSS + JS', '#e08aa0'],
+        ['Персональный сайт', 'HTML + CSS + JS', '#e08aa0'],
         ['Игра на Python', 'Рогалик на python(pygame)', '#6fb7a8'],
         ['Калькулятор', 'C++, консольное приложение', '#f0c36a'],
         ['Конект 2х компов', 'Python + tcp + udp', '#9bb7e0'],
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         projects: {
             label: 'НАВЫКИ',
-            title: 'Мои Навыки',
+            title: 'Мои Проекты',
             html: `<p>Наведи курсор на пластинку — увидишь проект.</p>
                 <div class="minis">${minis}</div>
                 <h4>Языки программирования</h4>
